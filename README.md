@@ -1,5 +1,4 @@
-# Practica-VVS
-#[![Build Status](https://github.com/alejandrofortes/Practica-VVS)](https://github.com/alejandrofortes/Practica-VVS) 
+# Practica-VVS [![Build Status](https://github.com/alejandrofortes/Practica-VVS)](https://github.com/alejandrofortes/Practica-VVS) 
 
 
 https://travis-ci.org/alejandrofortes/prueba.svg?branch=master
