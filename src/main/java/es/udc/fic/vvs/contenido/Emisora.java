@@ -6,10 +6,10 @@ import java.util.List;
 public class Emisora implements Contenido {
 
 	private String titulo;
-	private int duracion;
+	private double duracion;
 	private List<Contenido> listaReproduccion;
 
-	public Emisora(String titulo, int duracion, List<Contenido> listaReproduccion) {
+	public Emisora(String titulo, double duracion, List<Contenido> listaReproduccion) {
 		super();
 		this.titulo = titulo;
 		this.duracion = duracion;
@@ -20,7 +20,7 @@ public class Emisora implements Contenido {
 		return this.titulo;
 	}
 
-	public int obtenerDuracion() {
+	public double obtenerDuracion() {
 		return this.duracion;
 	}
 

@@ -6,12 +6,12 @@ import java.util.List;
 public class Anuncio implements Contenido {
 
 	private String titulo;
-	private int duracion;
+	private double duracion;
 	private List<Contenido> listaReproduccion;
 
 	public static final String TITULO_POR_DEFECTO = "PUBLICIDAD";
 
-	public static final int DURACION_POR_DEFECTO = 5;
+	public static final double DURACION_POR_DEFECTO = 5;
 
 	public Anuncio(List<Contenido> listaReproduccion) {
 		super();
@@ -24,7 +24,7 @@ public class Anuncio implements Contenido {
 		return this.titulo;
 	}
 
-	public int obtenerDuracion() {
+	public double obtenerDuracion() {
 		return this.duracion;
 	}
 

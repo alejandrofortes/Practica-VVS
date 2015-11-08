@@ -6,10 +6,10 @@ import java.util.List;
 public class Cancion implements Contenido {
 
 	private String titulo;
-	private int duracion;
+	private double duracion;
 	private List<Contenido> listaReproduccion;
 
-	public Cancion(String titulo, int duracion, List<Contenido> listaReproduccion) {
+	public Cancion(String titulo, double duracion, List<Contenido> listaReproduccion) {
 		super();
 		this.titulo = titulo;
 		this.duracion = duracion;
@@ -20,7 +20,7 @@ public class Cancion implements Contenido {
 		return this.titulo;
 	}
 
-	public int obtenerDuracion() {
+	public double obtenerDuracion() {
 		return this.duracion;
 	}
 
