@@ -1,17 +1,18 @@
 package es.udc.fic.vvs.contenido;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Anuncio implements Contenido {
 
 	private String titulo;
-	private float duracion;
+	private int duracion;
 	private List<Contenido> listaReproduccion;
-	
+
 	public static final String TITULO_POR_DEFECTO = "PUBLICIDAD";
-	
-	public static final float DURACION_POR_DEFECTO = (float) 5;
-		
+
+	public static final int DURACION_POR_DEFECTO = 5;
+
 	public Anuncio(List<Contenido> listaReproduccion) {
 		super();
 		this.titulo = TITULO_POR_DEFECTO;
@@ -20,33 +21,36 @@ public class Anuncio implements Contenido {
 	}
 
 	public String obtenerTitulo() {
-		// TODO Auto-generated method stub
-		return null;
+		return this.titulo;
 	}
 
 	public int obtenerDuracion() {
-		// TODO Auto-generated method stub
-		return 0;
+		return this.duracion;
 	}
 
 	public List<Contenido> obtenerListaReproduccion() {
-		// TODO Auto-generated method stub
-		return null;
+		List<Contenido> resultado = new ArrayList<Contenido>();
+		resultado.add(this); //Devolver el propio anuncio, en una lista.
+		return resultado;
 	}
 
 	public List<Contenido> buscar(String subcadena) {
-		// TODO Auto-generated method stub
-		return null;
+		List<Contenido> resultado = new ArrayList<Contenido>();
+
+		if (subcadena.equals(this.titulo)){
+			resultado.add(this); 
+		}
+		return resultado;	//Si no coincide, lista vacia?
 	}
 
 	public void agregar(Contenido contenido, Contenido predecesor) {
-		// TODO Auto-generated method stub
-		
+		System.out.println("'Agregar' no tiene efecto en anuncios");
+
 	}
 
 	public void eliminar(Contenido contenido) {
-		// TODO Auto-generated method stub
-		
+		System.out.println("'Eliminar' no tiene efecto en anuncios");
+
 	}
 
 }

@@ -1,14 +1,15 @@
 package es.udc.fic.vvs.contenido;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Emisora implements Contenido {
 
 	private String titulo;
-	private float duracion;
+	private int duracion;
 	private List<Contenido> listaReproduccion;
-	
-	public Emisora(String titulo, float duracion, List<Contenido> listaReproduccion) {
+
+	public Emisora(String titulo, int duracion, List<Contenido> listaReproduccion) {
 		super();
 		this.titulo = titulo;
 		this.duracion = duracion;
@@ -16,33 +17,50 @@ public class Emisora implements Contenido {
 	}
 
 	public String obtenerTitulo() {
-		// TODO Auto-generated method stub
-		return null;
+		return this.titulo;
 	}
 
 	public int obtenerDuracion() {
-		// TODO Auto-generated method stub
-		return 0;
+		return this.duracion;
 	}
 
 	public List<Contenido> obtenerListaReproduccion() {
-		// TODO Auto-generated method stub
-		return null;
+		return this.listaReproduccion;
 	}
 
 	public List<Contenido> buscar(String subcadena) {
-		// TODO Auto-generated method stub
-		return null;
+		int i = 0;
+		List<Contenido> resultado = new ArrayList<Contenido>();
+		for(Contenido con: this.listaReproduccion){
+			if(con.obtenerTitulo().equals(subcadena)){
+				resultado.add(con);
+			}
+			i++;
+		}	
+		return resultado;
 	}
 
 	public void agregar(Contenido contenido, Contenido predecesor) {
-		// TODO Auto-generated method stub
-		
+		//Buscar en la lista el predecesor elemento a elemento
+		//al encontrarlo, insertarlo en la posicion siguiente
+		int i = 0;
+		for(Contenido con: this.listaReproduccion){
+			if(con.obtenerTitulo().equals(predecesor.obtenerTitulo())){
+				this.listaReproduccion.add(i+1, contenido);
+			}
+			i++;
+		}		
+
 	}
 
 	public void eliminar(Contenido contenido) {
-		// TODO Auto-generated method stub
-		
+		int i = 0;
+		for(Contenido con: this.listaReproduccion){
+			if(con.obtenerTitulo().equals(contenido.obtenerTitulo())){
+				this.listaReproduccion.remove(i);
+			}
+			i++;
+		}	
 	}
 
 }

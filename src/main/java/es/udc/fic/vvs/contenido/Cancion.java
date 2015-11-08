@@ -1,14 +1,15 @@
 package es.udc.fic.vvs.contenido;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Cancion implements Contenido {
 
 	private String titulo;
-	private float duracion;
+	private int duracion;
 	private List<Contenido> listaReproduccion;
-	
-	public Cancion(String titulo, float duracion, List<Contenido> listaReproduccion) {
+
+	public Cancion(String titulo, int duracion, List<Contenido> listaReproduccion) {
 		super();
 		this.titulo = titulo;
 		this.duracion = duracion;
@@ -16,33 +17,35 @@ public class Cancion implements Contenido {
 	}
 
 	public String obtenerTitulo() {
-		// TODO Auto-generated method stub
-		return null;
+		return this.titulo;
 	}
 
 	public int obtenerDuracion() {
-		// TODO Auto-generated method stub
-		return 0;
+		return this.duracion;
 	}
 
 	public List<Contenido> obtenerListaReproduccion() {
-		// TODO Auto-generated method stub
-		return null;
+		List<Contenido> resultado = new ArrayList<Contenido>();
+		resultado.add(this); //Devolver la propia cancion, en una lista.
+		return resultado;
 	}
 
 	public List<Contenido> buscar(String subcadena) {
-		// TODO Auto-generated method stub
-		return null;
+		List<Contenido> resultado = new ArrayList<Contenido>();
+
+		if (subcadena.equals(this.titulo)){
+			resultado.add(this); 
+		}
+		return resultado;	//Si no coincide, lista vacia?		
+
 	}
 
 	public void agregar(Contenido contenido, Contenido predecesor) {
-		// TODO Auto-generated method stub
-		
+		System.out.println("'Agregar' no tiene efecto en canciones");
 	}
 
 	public void eliminar(Contenido contenido) {
-		// TODO Auto-generated method stub
-		
+		System.out.println("'Eliminar' no tiene efecto en canciones");		
 	}
 
 }
