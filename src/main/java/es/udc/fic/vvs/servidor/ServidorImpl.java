@@ -1,10 +1,12 @@
 package es.udc.fic.vvs.servidor;
 
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
 import org.javatuples.Pair;
 
+import es.udc.fic.vvs.contenido.Anuncio;
 import es.udc.fic.vvs.contenido.Contenido;
 import es.udc.fic.vvs.util.exceptions.InstanceNotFoundException;
 
@@ -83,10 +85,54 @@ public class ServidorImpl implements Servidor {
 		}
 	}
 
-	public List<Contenido> buscar(String subcadena, String token) {
-		// TODO Auto-generated method stub
-		// Aqui es donde iriamos decrementando el token.
-		return null;
+	public List<Contenido> buscar(String subcadena, String token) throws InstanceNotFoundException {
+
+		boolean fin = false;
+		Iterator<Pair<String, Integer>> iterTokens;
+		iterTokens = tokens.iterator();
+		Pair<String, Integer> auxPair = null;
+		while (iterTokens.hasNext() && !fin) {
+			if ((auxPair = iterTokens.next()).equals(token)) {
+				fin = true;
+				tokens.remove(auxPair);
+			}
+		}
+		Pair<String, Integer> tokenGuardado = auxPair;
+
+		if (tokenGuardado == null)
+			throw new InstanceNotFoundException(tokens, "Token");
+
+		List<Contenido> resultados = new ArrayList<Contenido>();
+
+		if (token.equals("")) { // Se usa token vacio para la busqueda
+			resultados.add(new Anuncio());
+			Iterator<Contenido> iterator;
+			iterator = contenidos.iterator();
+			int i = 0;
+			while (iterator.hasNext()) {
+				if (i > 2) {
+					resultados.add(new Anuncio());
+					i = 0;
+				} else {
+					resultados.add(iterator.next());
+					i++;
+				}
+			}
+		} else {
+			Iterator<Contenido> iterator;
+			iterator = contenidos.iterator();
+			Contenido aux;
+			while (iterator.hasNext()) {
+				aux = iterator.next();
+				if (aux.obtenerTitulo().contains(subcadena)) {
+					resultados.add(aux);
+				}
+			}
+			// actualizar el numero de contenidos que quedan por devolver
+			tokens.add(new Pair<String, Integer>(token, tokenGuardado.getValue1() - 1));
+		}
+
+		return resultados;
 	}
 
 }

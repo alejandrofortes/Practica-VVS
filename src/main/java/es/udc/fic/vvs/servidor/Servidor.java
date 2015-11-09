@@ -17,6 +17,6 @@ public interface Servidor {
 
 	public void eliminar(Contenido contenido, String token);
 
-	public List<Contenido> buscar(String subcadena, String token);
+	public List<Contenido> buscar(String subcadena, String token) throws InstanceNotFoundException;
 
 }

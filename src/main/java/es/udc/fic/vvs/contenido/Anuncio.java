@@ -9,9 +9,17 @@ public class Anuncio implements Contenido {
 	private double duracion;
 	private List<Contenido> listaReproduccion;
 
-	public static final String TITULO_POR_DEFECTO = "PUBLICIDAD";
+	private static final String TITULO_POR_DEFECTO = "PUBLICIDAD";
 
-	public static final double DURACION_POR_DEFECTO = 5;
+	private static final double DURACION_POR_DEFECTO = 5;
+
+	
+	
+	public Anuncio() {
+		super();
+		this.titulo = TITULO_POR_DEFECTO;
+		this.duracion = DURACION_POR_DEFECTO;
+	}
 
 	public Anuncio(List<Contenido> listaReproduccion) {
 		super();
