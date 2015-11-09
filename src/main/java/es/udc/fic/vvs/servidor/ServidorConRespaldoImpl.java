@@ -10,14 +10,11 @@ public class ServidorConRespaldoImpl extends ServidorImpl{
 
 	private Servidor respaldo;
 
-
-	public ServidorConRespaldoImpl(String nombre, List<Contenido> contenidos,
-			Pair<String, Integer> tokens, Servidor respaldo) {
+	public ServidorConRespaldoImpl(String nombre, List<Contenido> contenidos, List<Pair<String, Integer>> tokens,
+			Servidor respaldo) {
 		super(nombre, contenidos, tokens);
 		this.respaldo = respaldo;
 	}
-
-
 
 	@Override
 	public List<Contenido> buscar(String subcadena, String token) {
