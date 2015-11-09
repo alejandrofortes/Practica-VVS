@@ -10,6 +10,8 @@ import es.udc.fic.vvs.contenido.Anuncio;
 import es.udc.fic.vvs.contenido.Contenido;
 import es.udc.fic.vvs.util.exceptions.InstanceNotFoundException;
 
+/**
+ */
 public class ServidorImpl implements Servidor {
 
 	private String nombre;
@@ -18,23 +20,22 @@ public class ServidorImpl implements Servidor {
 
 	private static final String TOKEN_MAESTRO = "tokenmas";
 
-	// ------------------------ Código para generar tokens aleatorios
-	// ----------------------------
-	char[] elementos = { '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i',
-			'j', 'k', 'l', 'm', 'n', 'ñ', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z' };
+	private static final char[] elementos = { '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'a', 'b', 'c', 'd', 'e',
+			'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'ñ', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y',
+			'z' };
 
-	char[] conjunto = new char[8];
-	String pass;
+	private static final char[] conjunto = new char[8];
 
-	private String creaPass() {
-		for (int i = 0; i < 8; i++) {
-			int el = (int) (Math.random() * 37);
-			conjunto[i] = elementos[el];
-		}
-		return pass = new String(conjunto);
-	}
-	// -------------------------------------------------------------------------------------------
-
+	/**
+	 * Constructor for ServidorImpl.
+	 * 
+	 * @param nombre
+	 *            String
+	 * @param contenidos
+	 *            List<Contenido>
+	 * @param tokens
+	 *            List<Pair<String,Integer>>
+	 */
 	public ServidorImpl(String nombre, List<Contenido> contenidos, List<Pair<String, Integer>> tokens) {
 		super();
 		this.nombre = nombre;
@@ -42,16 +43,36 @@ public class ServidorImpl implements Servidor {
 		this.tokens = tokens;
 	}
 
+	/**
+	 * Obtener nombre del servidor.
+	 * 
+	 * @return String
+	 * @see es.udc.fic.vvs.servidor.Servidor#obtenerNombre()
+	 */
 	public String obtenerNombre() {
 		return this.nombre;
 	}
 
+	/**
+	 * Agregar un token al servidor.
+	 * 
+	 * @return String
+	 * @see es.udc.fic.vvs.servidor.Servidor#alta()
+	 */
 	public String alta() {
-		String token = creaPass();
+		String token = generarToken();
 		tokens.add(new Pair<String, Integer>(token, 10));
 		return token;
 	}
 
+	/**
+	 * Eliminar un token del servidor.
+	 * 
+	 * @param token
+	 *            String
+	 * @throws InstanceNotFoundException
+	 * @see es.udc.fic.vvs.servidor.Servidor#baja(String)
+	 */
 	public void baja(String token) throws InstanceNotFoundException {
 		boolean fin = false;
 		Iterator<Contenido> iterator;
@@ -69,22 +90,54 @@ public class ServidorImpl implements Servidor {
 		}
 	}
 
+	/**
+	 * Agregar contenido al servidor. Solo un token especial puede agregar
+	 * contenidos.
+	 * 
+	 * @param contenido
+	 *            Contenido
+	 * @param token
+	 *            String
+	 * @see es.udc.fic.vvs.servidor.Servidor#agregar(Contenido, String)
+	 */
 	public void agregar(Contenido contenido, String token) {
 		if (token.equals(TOKEN_MAESTRO)) {
 			this.contenidos.add(contenido);
 		} else {
-			System.out.print("El token introducido no es un token 'maestro'");
+			System.err.print("El token introducido no es un token 'maestro'");
 		}
 	}
 
+	/**
+	 * Eliminar contenido del servidor. Solo un token especial puede eliminar
+	 * contenidos.
+	 * 
+	 * @param contenido
+	 *            Contenido
+	 * @param token
+	 *            String
+	 * @see es.udc.fic.vvs.servidor.Servidor#eliminar(Contenido, String)
+	 */
 	public void eliminar(Contenido contenido, String token) {
 		if (token.equals(TOKEN_MAESTRO)) {
 			this.contenidos.remove(contenido);
 		} else {
-			System.out.print("El token introducido no es un token 'maestro'");
+			System.err.print("El token introducido no es un token 'maestro'");
 		}
 	}
 
+	/**
+	 * Buscar contenido en el servidor que contenga la subcadena especificada
+	 * como titulo
+	 * 
+	 * @param subcadena
+	 *            String
+	 * @param token
+	 *            String
+	 * @return List<Contenido>
+	 * @throws InstanceNotFoundException
+	 * @see es.udc.fic.vvs.servidor.Servidor#buscar(String, String)
+	 */
 	public List<Contenido> buscar(String subcadena, String token) throws InstanceNotFoundException {
 
 		boolean fin = false;
@@ -128,11 +181,25 @@ public class ServidorImpl implements Servidor {
 					resultados.add(aux);
 				}
 			}
-			// actualizar el numero de contenidos que quedan por devolver
-			tokens.add(new Pair<String, Integer>(token, tokenGuardado.getValue1() - 1));
+			// Actualizar el numero de contenidos que quedan por devolver si no ha caducado.
+			if (tokenGuardado.getValue1() > 0)
+				tokens.add(new Pair<String, Integer>(token, tokenGuardado.getValue1() - 1));
 		}
 
 		return resultados;
+	}
+
+	/**
+	 * Permite generar tokens aleatorios
+	 * 
+	 * @return String token
+	 */
+	private String generarToken() {
+		for (int i = 0; i < 8; i++) {
+			int el = (int) (Math.random() * 37);
+			conjunto[i] = elementos[el];
+		}
+		return new String(conjunto);
 	}
 
 }

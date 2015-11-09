@@ -3,12 +3,24 @@ package es.udc.fic.vvs.contenido;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ */
 public class Cancion implements Contenido {
 
 	private String titulo;
 	private double duracion;
 	private List<Contenido> listaReproduccion;
 
+	/**
+	 * Constructor for Cancion.
+	 * 
+	 * @param titulo
+	 *            String
+	 * @param duracion
+	 *            double
+	 * @param listaReproduccion
+	 *            List<Contenido>
+	 */
 	public Cancion(String titulo, double duracion, List<Contenido> listaReproduccion) {
 		super();
 		this.titulo = titulo;
@@ -16,36 +28,77 @@ public class Cancion implements Contenido {
 		this.listaReproduccion = listaReproduccion;
 	}
 
+	/**
+	 * Obtener título de una cancion.
+	 * 
+	 * @return String
+	 * @see es.udc.fic.vvs.contenido.Contenido#obtenerTitulo()
+	 */
 	public String obtenerTitulo() {
 		return this.titulo;
 	}
 
+	/**
+	 * Obtener duracion de una cancion.
+	 * 
+	 * @return double
+	 * @see es.udc.fic.vvs.contenido.Contenido#obtenerDuracion()
+	 */
 	public double obtenerDuracion() {
 		return this.duracion;
 	}
 
+	/**
+	 * Obtener lista de reproduccion de una cancion.
+	 * 
+	 * @return List<Contenido>
+	 * @see es.udc.fic.vvs.contenido.Contenido#obtenerListaReproduccion()
+	 */
 	public List<Contenido> obtenerListaReproduccion() {
 		List<Contenido> resultado = new ArrayList<Contenido>();
-		resultado.add(this); //Devolver la propia cancion, en una lista.
+		resultado.add(this);
 		return resultado;
 	}
 
+	/**
+	 * Buscar cancion que contenga la subcadena especificada en su titulo.
+	 * 
+	 * @param subcadena
+	 *            String
+	 * @return List<Contenido>
+	 * @see es.udc.fic.vvs.contenido.Contenido#buscar(String)
+	 */
 	public List<Contenido> buscar(String subcadena) {
 		List<Contenido> resultado = new ArrayList<Contenido>();
 
-		if (subcadena.equals(this.titulo)){
-			resultado.add(this); 
+		if (subcadena.equals(this.titulo)) {
+			resultado.add(this);
 		}
-		return resultado;	//Si no coincide, lista vacia?		
-
+		return resultado;
 	}
 
+	/**
+	 * Agregar una cancion.
+	 * 
+	 * @param contenido
+	 *            Contenido
+	 * @param predecesor
+	 *            Contenido
+	 * @see es.udc.fic.vvs.contenido.Contenido#agregar(Contenido, Contenido)
+	 */
 	public void agregar(Contenido contenido, Contenido predecesor) {
-		System.out.println("'Agregar' no tiene efecto en canciones");
+		System.err.println("'Agregar' no tiene efecto en canciones");
 	}
 
+	/**
+	 * Eliminar una cancion.
+	 * 
+	 * @param contenido
+	 *            Contenido
+	 * @see es.udc.fic.vvs.contenido.Contenido#eliminar(Contenido)
+	 */
 	public void eliminar(Contenido contenido) {
-		System.out.println("'Eliminar' no tiene efecto en canciones");		
+		System.err.println("'Eliminar' no tiene efecto en canciones");
 	}
 
 }
