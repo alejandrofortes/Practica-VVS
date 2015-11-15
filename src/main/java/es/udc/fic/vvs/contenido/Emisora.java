@@ -21,11 +21,12 @@ public class Emisora implements Contenido {
 	 * @param listaReproduccion
 	 *            List<Contenido>
 	 */
-	public Emisora(String titulo, double duracion, List<Contenido> listaReproduccion) {
+	public Emisora(String titulo, double duracion) {
 		super();
 		this.titulo = titulo;
 		this.duracion = duracion;
-		this.listaReproduccion = listaReproduccion;
+		this.listaReproduccion = new ArrayList<Contenido>();
+		listaReproduccion.add(this);
 	}
 
 	/**
@@ -67,15 +68,13 @@ public class Emisora implements Contenido {
 	 * @see es.udc.fic.vvs.contenido.Contenido#buscar(String)
 	 */
 	public List<Contenido> buscar(String subcadena) {
-		int i = 0;
-		List<Contenido> resultado = new ArrayList<Contenido>();
+		List<Contenido> resultados = new ArrayList<Contenido>();
 		for (Contenido contenido : this.listaReproduccion) {
-			if (contenido.obtenerTitulo().equals(subcadena)) {
-				resultado.add(contenido);
+			if (contenido.obtenerTitulo().toLowerCase().contains(subcadena.toLowerCase())) {
+				resultados.add(contenido);
 			}
-			i++;
 		}
-		return resultado;
+		return resultados;
 	}
 
 	/**
@@ -88,16 +87,8 @@ public class Emisora implements Contenido {
 	 * @see es.udc.fic.vvs.contenido.Contenido#agregar(Contenido, Contenido)
 	 */
 	public void agregar(Contenido contenido, Contenido predecesor) {
-		/*
-		 * Buscar en la lista el predecesor Insertarlo en la posicion siguiente
-		 */
-		int i = 0;
-		for (Contenido con : this.listaReproduccion) {
-			if (con.obtenerTitulo().equals(predecesor.obtenerTitulo())) {
-				this.listaReproduccion.add(i + 1, contenido);
-			}
-			i++;
-		}
+		this.listaReproduccion.add(listaReproduccion.indexOf(predecesor) + 1, contenido);
+		this.duracion = this.duracion + contenido.obtenerDuracion();
 
 	}
 
@@ -109,11 +100,8 @@ public class Emisora implements Contenido {
 	 * @see es.udc.fic.vvs.contenido.Contenido#eliminar(Contenido)
 	 */
 	public void eliminar(Contenido contenido) {
-		for (Contenido con : this.listaReproduccion) {
-			if (con.obtenerTitulo().equals(contenido.obtenerTitulo())) {
-				this.listaReproduccion.remove(con);
-			}
-		}
+		this.listaReproduccion.remove(contenido);
+		this.duracion = this.duracion - contenido.obtenerDuracion();
 	}
 
 }

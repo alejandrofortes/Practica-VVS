@@ -28,19 +28,8 @@ public class Anuncio implements Contenido {
 		super();
 		this.titulo = TITULO_POR_DEFECTO;
 		this.duracion = DURACION_POR_DEFECTO;
-	}
-
-	/**
-	 * Constructor for Anuncio.
-	 * 
-	 * @param listaReproduccion
-	 *            List<Contenido>
-	 */
-	public Anuncio(List<Contenido> listaReproduccion) {
-		super();
-		this.titulo = TITULO_POR_DEFECTO;
-		this.duracion = DURACION_POR_DEFECTO;
-		this.listaReproduccion = listaReproduccion;
+		this.listaReproduccion = new ArrayList<Contenido>();
+		listaReproduccion.add(this);
 	}
 
 	/**
@@ -70,9 +59,7 @@ public class Anuncio implements Contenido {
 	 * @see es.udc.fic.vvs.contenido.Contenido#obtenerListaReproduccion()
 	 */
 	public List<Contenido> obtenerListaReproduccion() {
-		List<Contenido> resultado = new ArrayList<Contenido>();
-		resultado.add(this);
-		return resultado;
+		return this.listaReproduccion;
 	}
 
 	/**
@@ -86,7 +73,7 @@ public class Anuncio implements Contenido {
 	public List<Contenido> buscar(String subcadena) {
 		List<Contenido> resultado = new ArrayList<Contenido>();
 
-		if (subcadena.equals(this.titulo)) {
+		if (this.titulo.toLowerCase().contains(subcadena.toLowerCase())) {
 			resultado.add(this);
 		}
 		return resultado;

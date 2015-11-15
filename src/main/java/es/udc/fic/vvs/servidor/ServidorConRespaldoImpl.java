@@ -46,9 +46,8 @@ public class ServidorConRespaldoImpl extends ServidorImpl {
 	 */
 	@Override
 	public List<Contenido> buscar(String subcadena, String token) throws InstanceNotFoundException {
-		List<Contenido> resultados = new ArrayList<Contenido>();
-		resultados = super.buscar(subcadena, token);
-		return (resultados.size() == 0) ? respaldo.buscar(subcadena, token) : resultados;
+		return (super.buscar(subcadena, token).size() == 0) ? respaldo.buscar(subcadena, token)
+				: new ArrayList<Contenido>();
 	}
 
 }

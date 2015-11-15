@@ -21,11 +21,12 @@ public class Cancion implements Contenido {
 	 * @param listaReproduccion
 	 *            List<Contenido>
 	 */
-	public Cancion(String titulo, double duracion, List<Contenido> listaReproduccion) {
+	public Cancion(String titulo, double duracion) {
 		super();
 		this.titulo = titulo;
 		this.duracion = duracion;
-		this.listaReproduccion = listaReproduccion;
+		this.listaReproduccion = new ArrayList<Contenido>();
+		listaReproduccion.add(this);
 	}
 
 	/**
@@ -55,9 +56,7 @@ public class Cancion implements Contenido {
 	 * @see es.udc.fic.vvs.contenido.Contenido#obtenerListaReproduccion()
 	 */
 	public List<Contenido> obtenerListaReproduccion() {
-		List<Contenido> resultado = new ArrayList<Contenido>();
-		resultado.add(this);
-		return resultado;
+		return this.listaReproduccion;
 	}
 
 	/**
@@ -71,7 +70,7 @@ public class Cancion implements Contenido {
 	public List<Contenido> buscar(String subcadena) {
 		List<Contenido> resultado = new ArrayList<Contenido>();
 
-		if (subcadena.equals(this.titulo)) {
+		if (this.titulo.toLowerCase().contains(subcadena.toLowerCase())) {
 			resultado.add(this);
 		}
 		return resultado;

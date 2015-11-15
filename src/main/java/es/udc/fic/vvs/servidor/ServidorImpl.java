@@ -75,18 +75,17 @@ public class ServidorImpl implements Servidor {
 	 */
 	public void baja(String token) throws InstanceNotFoundException {
 		boolean fin = false;
-		Iterator<Contenido> iterator;
-		iterator = contenidos.iterator();
-		Contenido aux;
+		Iterator<Pair<String, Integer>> iterator = tokens.iterator();
+		Pair<String, Integer> aux;
 		while (iterator.hasNext() && !fin) {
-			if ((aux = iterator.next()).equals(token)) {
+			if ((aux = iterator.next()).getValue0().equals(token)) {
 				fin = true;
-				contenidos.remove(aux);
+				tokens.remove(aux);
 			}
 		}
 
 		if (!fin) {
-			throw new InstanceNotFoundException(contenidos, "Contenido");
+			throw new InstanceNotFoundException(tokens, "Tokens");
 		}
 	}
 
@@ -181,7 +180,8 @@ public class ServidorImpl implements Servidor {
 					resultados.add(aux);
 				}
 			}
-			// Actualizar el numero de contenidos que quedan por devolver si no ha caducado.
+			// Actualizar el numero de contenidos que quedan por devolver si no
+			// ha caducado.
 			if (tokenGuardado.getValue1() > 0)
 				tokens.add(new Pair<String, Integer>(token, tokenGuardado.getValue1() - 1));
 		}
