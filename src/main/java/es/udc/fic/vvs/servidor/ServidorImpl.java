@@ -21,8 +21,8 @@ public class ServidorImpl implements Servidor {
 	private static final String TOKEN_MAESTRO = "tokenmas";
 
 	private static final char[] elementos = { '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'a', 'b', 'c', 'd', 'e',
-			'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'ñ', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y',
-			'z' };
+		'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'ñ', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y',
+	'z' };
 
 	private static final char[] conjunto = new char[8];
 
@@ -144,8 +144,9 @@ public class ServidorImpl implements Servidor {
 		iterTokens = tokens.iterator();
 		Pair<String, Integer> auxPair = null;
 		while (iterTokens.hasNext() && !fin) {
-			if ((auxPair = iterTokens.next()).equals(token)) {
-				fin = true;
+			auxPair = iterTokens.next();
+			if ((auxPair.getValue0()).equals(token)) {
+				fin = true;				
 				tokens.remove(auxPair);
 			}
 		}
