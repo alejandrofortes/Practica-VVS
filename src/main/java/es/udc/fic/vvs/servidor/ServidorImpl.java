@@ -15,7 +15,7 @@ import es.udc.fic.vvs.util.exceptions.InstanceNotFoundException;
 public class ServidorImpl implements Servidor {
 
 	private String nombre;
-	private List<Contenido> contenidos;
+	private List<Contenido> contenidos = new ArrayList<Contenido>();
 	private List<Pair<String, Integer>> tokens;
 
 	private static final String TOKEN_MAESTRO = "tokenmas";
@@ -61,6 +61,7 @@ public class ServidorImpl implements Servidor {
 	 */
 	public String alta() {
 		String token = generarToken();
+		if(tokens == null) {tokens = new ArrayList<Pair<String, Integer>>();}
 		tokens.add(new Pair<String, Integer>(token, 10));
 		return token;
 	}
@@ -101,7 +102,10 @@ public class ServidorImpl implements Servidor {
 	 */
 	public void agregar(Contenido contenido, String token) {
 		if (token.equals(TOKEN_MAESTRO)) {
+			if (contenidos == null) 
+			{contenidos = new ArrayList<Contenido>();}
 			this.contenidos.add(contenido);
+
 		} else {
 			System.err.print("El token introducido no es un token 'maestro'");
 		}
@@ -141,6 +145,7 @@ public class ServidorImpl implements Servidor {
 
 		boolean fin = false;
 		Iterator<Pair<String, Integer>> iterTokens;
+		if(tokens==null) tokens = new ArrayList<Pair<String, Integer>>();
 		iterTokens = tokens.iterator();
 		Pair<String, Integer> auxPair = null;
 		while (iterTokens.hasNext() && !fin) {
@@ -150,10 +155,12 @@ public class ServidorImpl implements Servidor {
 				tokens.remove(auxPair);
 			}
 		}
+
 		Pair<String, Integer> tokenGuardado = auxPair;
 
-		if (tokenGuardado == null)
+		if (tokenGuardado == null && token!=""){
 			throw new InstanceNotFoundException(tokens, "Token");
+		}
 
 		List<Contenido> resultados = new ArrayList<Contenido>();
 
