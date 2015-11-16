@@ -1,9 +1,11 @@
-package es.udc.fic.vvs.contenido;
+package es.udc.fic.vvs.servidor;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import junit.framework.TestCase;
+import es.udc.fic.vvs.contenido.Cancion;
+import es.udc.fic.vvs.contenido.Contenido;
 import es.udc.fic.vvs.servidor.Servidor;
 import es.udc.fic.vvs.servidor.ServidorImpl;
 import es.udc.fic.vvs.util.exceptions.InstanceNotFoundException;
