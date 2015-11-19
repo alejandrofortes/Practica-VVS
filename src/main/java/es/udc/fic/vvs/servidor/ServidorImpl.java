@@ -15,14 +15,14 @@ import es.udc.fic.vvs.util.exceptions.InstanceNotFoundException;
 public class ServidorImpl implements Servidor {
 
 	private String nombre;
-	private List<Contenido> contenidos;
+	private List<Contenido> contenidos = new ArrayList<Contenido>();
 	private List<Pair<String, Integer>> tokens;
 
 	private static final String TOKEN_MAESTRO = "tokenmas";
 
 	private static final char[] elementos = { '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'a', 'b', 'c', 'd', 'e',
-			'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'ñ', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y',
-			'z' };
+		'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'ñ', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y',
+	'z' };
 
 	private static final char[] conjunto = new char[8];
 
@@ -61,6 +61,7 @@ public class ServidorImpl implements Servidor {
 	 */
 	public String alta() {
 		String token = generarToken();
+		if(tokens == null) {tokens = new ArrayList<Pair<String, Integer>>();}
 		tokens.add(new Pair<String, Integer>(token, 10));
 		return token;
 	}
@@ -101,7 +102,10 @@ public class ServidorImpl implements Servidor {
 	 */
 	public void agregar(Contenido contenido, String token) {
 		if (token.equals(TOKEN_MAESTRO)) {
+			if (contenidos == null) 
+			{contenidos = new ArrayList<Contenido>();}
 			this.contenidos.add(contenido);
+
 		} else {
 			System.err.print("El token introducido no es un token 'maestro'");
 		}
@@ -141,18 +145,22 @@ public class ServidorImpl implements Servidor {
 
 		boolean fin = false;
 		Iterator<Pair<String, Integer>> iterTokens;
+		if(tokens==null) tokens = new ArrayList<Pair<String, Integer>>();
 		iterTokens = tokens.iterator();
 		Pair<String, Integer> auxPair = null;
 		while (iterTokens.hasNext() && !fin) {
-			if ((auxPair = iterTokens.next()).equals(token)) {
-				fin = true;
+			auxPair = iterTokens.next();
+			if ((auxPair.getValue0()).equals(token)) {
+				fin = true;				
 				tokens.remove(auxPair);
 			}
 		}
+
 		Pair<String, Integer> tokenGuardado = auxPair;
 
-		if (tokenGuardado == null)
+		if (tokenGuardado == null && token!=""){
 			throw new InstanceNotFoundException(tokens, "Token");
+		}
 
 		List<Contenido> resultados = new ArrayList<Contenido>();
 
