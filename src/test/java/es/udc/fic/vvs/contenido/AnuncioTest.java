@@ -1,20 +1,15 @@
 package es.udc.fic.vvs.contenido;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
+
 import java.util.ArrayList;
 import java.util.List;
 
-import junit.framework.TestCase;
+import org.junit.Test;
 
-public class TestAnuncio extends TestCase {
+public class AnuncioTest{
 
-	/**
-	 * Construct new test instance
-	 *
-	 * @param name the test name
-	 */
-	public TestAnuncio(String name) {
-		super(name);
-	}
 
 	/**
 	 * Run the String obtenerTitulo() method test
@@ -27,14 +22,16 @@ public class TestAnuncio extends TestCase {
 	/**
 	 * Run the double obtenerDuracion() method test
 	 */
+	@Test
 	public void testObtenerDuracion() {
 		Anuncio anuncio = new Anuncio();
-		assertEquals(anuncio.obtenerDuracion(), 5.0);
+		assertTrue(anuncio.obtenerDuracion() == 5.0);
 	}
 	
 	/**
 	 * Run the List<Contenido> obtenerListaReproduccion() method test
 	 */
+	@Test
 	public void testObtenerListaReproduccion() {
 		Anuncio anuncio = new Anuncio();
 		List<Contenido> listaReproduccion = new ArrayList<Contenido>();
@@ -45,6 +42,7 @@ public class TestAnuncio extends TestCase {
 	/**
 	 * Run the List<Contenido> buscar(String) method test
 	 */
+	@Test
 	public void testBuscar() {
 		Anuncio anuncio = new Anuncio();
 		List<Contenido> listaReproduccion = new ArrayList<Contenido>();

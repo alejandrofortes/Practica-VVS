@@ -1,36 +1,19 @@
 package es.udc.fic.vvs.contenido;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
+
 import java.util.ArrayList;
 import java.util.List;
 
-import junit.framework.TestCase;
+import org.junit.Test;
 
-/**
- * The class <code>TestEmisora</code> contains tests for the class {@link
- * <code>Emisora</code>}
- *
- * @pattern JUnit Test Case
- *
- * @generatedBy CodePro at 15/11/15 0:27
- *
- * @author alejandro
- *
- * @version $Revision$
- */
-public class TestEmisora extends TestCase {
-
-	/**
-	 * Construct new test instance
-	 *
-	 * @param name the test name
-	 */
-	public TestEmisora(String name) {
-		super(name);
-	}
+public class EmisoraTest {
 
 	/**
 	 * Run the String obtenerTitulo() method test
 	 */
+	@Test
 	public void testObtenerTitulo() {
 		Emisora emisora = new Emisora("Emisora", 120.0);
 		assertEquals(emisora.obtenerTitulo(), "Emisora");
@@ -39,14 +22,16 @@ public class TestEmisora extends TestCase {
 	/**
 	 * Run the double obtenerDuracion() method test
 	 */
+	@Test
 	public void testObtenerDuracion() {
 		Emisora emisora = new Emisora("Emisora", 120.0);
-		assertEquals(emisora.obtenerDuracion(), 120.0);
+		assertTrue(emisora.obtenerDuracion() == 120.0);
 	}
 
 	/**
 	 * Run the List<Contenido> obtenerListaReproduccion() method test
 	 */
+	@Test
 	public void testObtenerListaReproduccion() {
 		Emisora emisora = new Emisora("Emisora", 120.0);
 		List<Contenido> listaReproduccion = new ArrayList<Contenido>();
@@ -57,6 +42,7 @@ public class TestEmisora extends TestCase {
 	/**
 	 * Run the List<Contenido> buscar(String) method test
 	 */
+	@Test
 	public void testBuscar() {
 		Emisora emisora = new Emisora("Emisora 1", 120.0);
 		List<Contenido> listaReproduccion = new ArrayList<Contenido>();
@@ -69,6 +55,7 @@ public class TestEmisora extends TestCase {
 	/**
 	 * Run the void agregar(Contenido, Contenido) method test
 	 */
+	@Test
 	public void testAgregar() {
 		Emisora emisora = new Emisora("Emisora", 120.0);
 		Cancion cancion = new Cancion("Cancion", 5.0);
@@ -82,6 +69,7 @@ public class TestEmisora extends TestCase {
 	/**
 	 * Run the void eliminar(Contenido) method test
 	 */
+	@Test
 	public void testEliminar() {
 		Emisora emisora = new Emisora("Emisora", 120.0);
 		Cancion cancion = new Cancion("Cancion", 5.0);
@@ -89,9 +77,9 @@ public class TestEmisora extends TestCase {
 		emisora.agregar(cancion, emisora);
 		listaReproduccion.add(emisora);
 		listaReproduccion.add(cancion);
-		assertEquals(emisora.obtenerDuracion(), 125.0);
+		assertTrue(emisora.obtenerDuracion() == 125.0);
 		emisora.eliminar(cancion);
-		assertEquals(emisora.obtenerDuracion(), 120.0);
+		assertTrue(emisora.obtenerDuracion() == 120.0);
 	}
 
 }

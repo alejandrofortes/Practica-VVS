@@ -1,29 +1,23 @@
 package es.udc.fic.vvs.servidor;
 
+import static org.junit.Assert.assertEquals;
+
 import java.util.ArrayList;
 import java.util.List;
 
-import junit.framework.TestCase;
+import org.junit.Test;
+
 import es.udc.fic.vvs.contenido.Cancion;
 import es.udc.fic.vvs.contenido.Contenido;
-import es.udc.fic.vvs.servidor.Servidor;
-import es.udc.fic.vvs.servidor.ServidorImpl;
 import es.udc.fic.vvs.util.exceptions.InstanceNotFoundException;
 
-public class TestServidor extends TestCase {
+public class ServidorTest {
 
-	/**
-	 * Construct new test instance
-	 *
-	 * @param name the test name
-	 */
-	public TestServidor(String name) {
-		super(name);
-	}
 
 	/**
 	 * Run the String obtenerNombre() method test
 	 */
+	@Test
 	public void testObtenerNombre() {
 		Servidor servidor = new ServidorImpl("servidor",null,null);
 		assertEquals(servidor.obtenerNombre(), "servidor");
@@ -32,6 +26,7 @@ public class TestServidor extends TestCase {
 	/**
 	 * Run the Alta, Agregar, Buscar method test
 	 */
+	@Test
 	public void testAltaAgregarBuscar() {
 		Servidor servidor = new ServidorImpl("servidor",null,null);
 		Contenido cancion = new Cancion("Cancion",180);
@@ -47,26 +42,23 @@ public class TestServidor extends TestCase {
 		}
 		assertEquals(canciones.get(0), cancion);
 	}
+	
 	/**
 	 * Run the Baja method test
+	 * @throws InstanceNotFoundException 
 	 */
-	public void testBaja(){
-		try {
+	@Test(expected = InstanceNotFoundException.class)
+	public void testBaja() throws InstanceNotFoundException{
 			Servidor servidor = new ServidorImpl("servidor",null,null);
 			String token = servidor.alta();
 			servidor.baja(token);
 			servidor.buscar("Hola", token);
-		}
-		catch (InstanceNotFoundException e) {
-			return;
-		}
-		fail("Expected InstanceNotFoundException");
-
 	}
 
 	/**
 	 * Run the Eliminar method test
 	 */
+	@Test
 	public void testEliminar(){
 
 		Servidor servidor = new ServidorImpl("servidor",null,null);
@@ -98,6 +90,7 @@ public class TestServidor extends TestCase {
 	/**
 	 * Run the Buscar token vacio method test
 	 */
+	@Test
 	public void testBuscarTokenVacio() {
 		Servidor servidor = new ServidorImpl("servidor",null,null);
 		Contenido cancion = new Cancion("Cancion",180);
@@ -115,7 +108,6 @@ public class TestServidor extends TestCase {
 		try {
 			canciones = servidor.buscar("Can", "");
 		} catch (InstanceNotFoundException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
