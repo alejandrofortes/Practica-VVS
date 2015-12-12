@@ -8,12 +8,12 @@ import java.util.List;
 
 import org.junit.Test;
 
-public class AnuncioTest{
-
+public class AnuncioTest {
 
 	/**
 	 * Run the String obtenerTitulo() method test
 	 */
+	@Test
 	public void testObtenerTitulo() {
 		Anuncio anuncio = new Anuncio();
 		assertEquals(anuncio.obtenerTitulo(), "PUBLICIDAD");
@@ -27,7 +27,7 @@ public class AnuncioTest{
 		Anuncio anuncio = new Anuncio();
 		assertTrue(anuncio.obtenerDuracion() == 5.0);
 	}
-	
+
 	/**
 	 * Run the List<Contenido> obtenerListaReproduccion() method test
 	 */

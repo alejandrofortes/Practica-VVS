@@ -9,7 +9,7 @@ public class Anuncio implements Contenido {
 
 	private String titulo;
 	private double duracion;
-	private List<Contenido> listaReproduccion;
+	private final List<Contenido> listaReproduccion;
 
 	/**
 	 * Titulo por defecto del anuncio
@@ -89,7 +89,6 @@ public class Anuncio implements Contenido {
 	 * @see es.udc.fic.vvs.contenido.Contenido#agregar(Contenido, Contenido)
 	 */
 	public void agregar(Contenido contenido, Contenido predecesor) {
-		System.err.println("'Agregar' no tiene efecto en anuncios");
 
 	}
 
@@ -101,7 +100,6 @@ public class Anuncio implements Contenido {
 	 * @see es.udc.fic.vvs.contenido.Contenido#eliminar(Contenido)
 	 */
 	public void eliminar(Contenido contenido) {
-		System.err.println("'Eliminar' no tiene efecto en anuncios");
 
 	}
 

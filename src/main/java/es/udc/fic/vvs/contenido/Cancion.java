@@ -86,7 +86,7 @@ public class Cancion implements Contenido {
 	 * @see es.udc.fic.vvs.contenido.Contenido#agregar(Contenido, Contenido)
 	 */
 	public void agregar(Contenido contenido, Contenido predecesor) {
-		System.err.println("'Agregar' no tiene efecto en canciones");
+
 	}
 
 	/**
@@ -97,7 +97,7 @@ public class Cancion implements Contenido {
 	 * @see es.udc.fic.vvs.contenido.Contenido#eliminar(Contenido)
 	 */
 	public void eliminar(Contenido contenido) {
-		System.err.println("'Eliminar' no tiene efecto en canciones");
+		
 	}
 
 }

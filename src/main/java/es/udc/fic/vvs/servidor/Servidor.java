@@ -45,8 +45,7 @@ public interface Servidor {
 	public void eliminar(Contenido contenido, String token);
 
 	/**
-	 * Buscar contenido en el servidor que contenga la subcadena especificada
-	 * como titulo
+	 * Buscar contenido en el servidor con la subcadena especificada
 	 * 
 	 * @param subcadena
 	 *            String
@@ -55,6 +54,6 @@ public interface Servidor {
 	 * @return List<Contenido>
 	 * @throws InstanceNotFoundException
 	 */
-	public List<Contenido> buscar(String subcadena, String token) throws InstanceNotFoundException;
+	public List<Contenido> buscar(String subcadena, String token);
 
 }
