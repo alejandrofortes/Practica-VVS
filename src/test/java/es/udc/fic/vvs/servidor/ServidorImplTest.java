@@ -61,7 +61,7 @@ public class ServidorImplTest {
 		Contenido cancion = new Cancion("Cancion", 180);
 		servidor.agregar(cancion, "tokenmas");
 
-		List<Contenido> canciones = canciones = servidor.buscar("Can", token);
+		List<Contenido> canciones = servidor.buscar("Can", token);
 
 		assertEquals(canciones.get(0), cancion);
 		servidor.eliminar(cancion, "tokenmas");
@@ -87,7 +87,7 @@ public class ServidorImplTest {
 		servidor.agregar(cancion3, "tokenmas");
 		servidor.agregar(cancion4, "tokenmas");
 
-		List<Contenido> canciones = canciones = servidor.buscar("Can", "");
+		List<Contenido> canciones = servidor.buscar("Can", "");
 
 		assertEquals(canciones.get(0).obtenerTitulo(), "PUBLICIDAD");
 		assertEquals(canciones.get(1).obtenerTitulo(), "Cancion");
