@@ -75,17 +75,6 @@ public class ContenidoQCTest {
 
 		assertTrue(emisora.obtenerTitulo().equals(tituloEmi));
 		assertTrue(emisora.obtenerDuracion() == (duracion + duracion2));
-
-		//		System.out.println("ATENCION AQUI");
-		//		System.out.println(emisora.obtenerListaReproduccion().get(0).obtenerTitulo());
-		//		System.out.println(emisora.obtenerListaReproduccion().get(1).obtenerTitulo());
-		//		System.out.println("ATENCION AQUI");
-
-
-		//		List<Contenido> lista = new ArrayList<Contenido>();
-		//		lista.add(cancion);
-		//		assertTrue(cancion.obtenerListaReproduccion().equals(lista));
-
 	}
 
 
