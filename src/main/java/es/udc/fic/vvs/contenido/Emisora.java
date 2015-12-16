@@ -87,7 +87,12 @@ public class Emisora implements Contenido {
 	 * @see es.udc.fic.vvs.contenido.Contenido#agregar(Contenido, Contenido)
 	 */
 	public void agregar(Contenido contenido, Contenido predecesor) {
-		this.listaReproduccion.add(listaReproduccion.indexOf(predecesor) + 1, contenido);
+		if(predecesor==null){
+			this.listaReproduccion.add(contenido);
+		}
+		else{
+			this.listaReproduccion.add(listaReproduccion.indexOf(predecesor) + 1, contenido);
+		}
 		this.duracion = this.duracion + contenido.obtenerDuracion();
 
 	}
